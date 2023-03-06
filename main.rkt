@@ -27,3 +27,9 @@
         (to-stx `(,#'format ,template ,@values)))))
 
 (provide #%datum)
+
+(module+ test
+  (require rackunit)
+  (define answer 42)
+  (check-equal? "What's the answer? 42" "What's the answer? @{answer}")
+  (check-equal? "4 + 2 = 6" "4 + 2 = @{(+ 4 2)}"))

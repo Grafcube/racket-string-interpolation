@@ -22,7 +22,7 @@ jobs:
           variant: ${{ matrix.racket-variant }}
           version: ${{ matrix.racket-version }}
       - name: Installing string-interpolation and its dependencies
-        run: raco pkg install --no-docs --auto --name string-interpolation
+        run: raco pkg install --auto --name string-interpolation
       - name: Compiling string-interpolation and building its docs
         run: raco setup --check-pkg-deps --unused-pkg-deps string-interpolation
       - name: Testing string-interpolation
