@@ -21,9 +21,9 @@ jobs:
           distribution: full
           variant: ${{ matrix.racket-variant }}
           version: ${{ matrix.racket-version }}
-      - name: Installing string-interpolation-rkt and its dependencies
-        run: raco pkg install --no-docs --auto --name string-interpolation-rkt
-      - name: Compiling string-interpolation-rkt and building its docs
-        run: raco setup --check-pkg-deps --unused-pkg-deps string-interpolation-rkt
-      - name: Testing string-interpolation-rkt
-        run: raco test -x -p string-interpolation-rkt
+      - name: Installing string-interpolation and its dependencies
+        run: raco pkg install --no-docs --auto --name string-interpolation
+      - name: Compiling string-interpolation and building its docs
+        run: raco setup --check-pkg-deps --unused-pkg-deps string-interpolation
+      - name: Testing string-interpolation
+        run: raco test -x -p string-interpolation
