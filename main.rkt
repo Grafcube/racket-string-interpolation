@@ -17,10 +17,10 @@
   (define (to-stx val)  (datum->syntax stx val))
   (define (datum val)   (to-stx (cons #'core-datum val)))
   (define (source text) (to-stx (read (open-input-string text))))
-  (define (unescape text) (regexp-replace #rx"@\\\\{" text "@{"))
+  (define (unescape text) (regexp-replace* #rx"@\\\\{" text "@{"))
   (let* ([text     (syntax->datum stx)]
          [matches  (regexp-match* re text)]
-         [template (datum (unescape (regexp-replace re text "~a")))]
+         [template (datum (unescape (regexp-replace* re text "~a")))]
          [values   (map (compose source trim) matches)])
     (if (null? matches)
         template
@@ -31,5 +31,7 @@
 (module+ test
   (require rackunit)
   (define answer 42)
+  (define two 2)
   (check-equal? "What's the answer? 42" "What's the answer? @{answer}")
-  (check-equal? "4 + 2 = 6" "4 + 2 = @{(+ 4 2)}"))
+  (check-equal? "4 + 2 = 6" "4 + 2 = @{(+ 4 2)}")
+  (check-equal? "4 + 2 = 6" "4 + @{two} = @{(+ 4 2)}"))
